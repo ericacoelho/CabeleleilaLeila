@@ -1,9 +1,10 @@
 const mysql = require('mysql');
 
 const con = mysql.createConnection({
-    host: '127.0.0.1', // O host do banco. Ex: localhost
+    host: 'tcc-gi.c0u8hz9ijhva.us-east-2.rds.amazonaws.com', // O host do banco. Ex: localhost
     user: 'root', // Um usuário do banco. Ex: user 
-    password: 'password', // A senha do usuário. Ex: user123
+    port: 3306,
+    password: 'batata123', // A senha do usuário. Ex: user123
     database: 'cabeleleila' // A base de dados a qual a aplicação irá se conectar, deve ser a mesma onde foi executado o Código 1. Ex: node_mysql
 })
 

@@ -5,7 +5,7 @@ module.exports = {
     async index(request , response){
         const result = []
         await banco.con.query(
-            'SELECT a.idAgenda, a.dataHora, a.valorTotal, a.location, b.idServico, b.descricaoServico, b.valorServico FROM servico as b INNER JOIN agenda as a ON a.idServico = b.idServico', 
+            'SELECT * FROM servico as b INNER JOIN agenda as a ON a.idServico = b.idServico', 
             (err, rows) => {
             if (err) { 
                 return response.status(404).send(err) 
@@ -17,7 +17,7 @@ module.exports = {
             });
             console.log('GET /agenda Agenda.index', result);
             return response.json(result)
-        })
+                    })
     },
      async show (request, response, next){
         const result = []
@@ -38,84 +38,97 @@ module.exports = {
         })
      },
 
-    // async create (request, response){
-    //     let { title, director, release_date, rt_score, people, species, description, image } = request.body
-    //     const filme = await Filme.create({
-    //         title,
-    //         director,
-    //         release_date,
-    //         rt_score,
-    //         people,
-    //         species,
-    //         description,
-    //         image
-    //     })
-    //     console.log('POST /filme/ Filme.create', request.body)
-    //     return response.json(filme)
-    // },
+    async create (request, response){
+        let { dia, valorTotal, idServico, horario, idUsuario } = request.body
+        const newAgenda = {
+                            valorTotal: valorTotal,
+                            idServico: idServico,
+                            dia: dia,
+                            horario: horario,
+                          }
 
-    // async update (req, response){
-    //     var _id = req.body._id
-    //     console.log('entrou aqui', _id)
+        await banco.con.query(
+            'INSERT INTO agenda SET ?', newAgenda, (err, res) => {
+                if (err) { 
+                    return response.status(404).send(err) 
+                }
+            console.log('POST /filme/ Filme.create', res.insertId)
+            return response.json(res.insertId)
+        })
+    },
 
+    async update (req, response){
+        console.log(req.body)
+        let query = 'UPDATE agenda SET'
 
-    //     Filme.findById(_id, function(err, doc) {
-    //         if (err){
-    //             console.error('error, no entry found');  
-    //         }
-    //         doc.title = req.body.title,
-    //         doc.director = req.body.director,
-    //         doc.release_date = req.body.release_date,
-    //         doc.description = req.body.description,
-    //         doc.rt_score = req.body.rt_score,
-    //         doc.people = req.body.people,
-    //         doc.species = req.body.species,
-    //         doc.image = req.body.image,
-    //         doc.save();
-    //     })
-    //     console.log('PUT /filme Filme.update', req.body)
-    //     return response.json(req.body)
-    // },
+        let key = Object.keys(req.body)
+        let value = Object.values(req.body)
+        let primaryKey = ''
+        for (let index = 0; index < key.length ; index++) {
+            if(key[index] === 'idAgenda'){
+                primaryKey = value[index]
+            } else if (key[index] === 'idServico'){
+                query += ` ${key[index]} = ${value[index]},`;    
+            }
+             else {
+                query += ` ${key[index]} = '${value[index]}',`;    
+            }          
+        }
+        query = query.slice(0, -1); 
+        query += ' '
 
-    // async updatePatch (request, response){
-    //     console.log('Ta entrando aqui?')
+        query += `WHERE idAgenda = ${primaryKey};`
 
-    //     var id = request.params.id
+        console.log(query)
+        await banco.con.query(query ,
+         (err,ressult) => {
+            if (err) { 
+                return response.status(404).send(err) 
+            }
+            console.log('PUT /filme/ Filme.updte', ressult)
+            return response.json(ressult)
+        })
+    },
 
-    //     Filme.findByIdAndUpdate(id, function(err, doc) {
-    //         if (err){
-    //             console.error('error, no entry found');  
-    //             return response.status(500).send('error, no entry found!');
-    //         }
+    async updatePatch (request, response){
+       console.log('Ta entrando aqui?')
 
-    //         const title = request.body.title || doc.title
-    //         const director = request.body.director || doc.director
-    //         const release_date = request.body.release_date || doc.release_date
-    //         const rt_score = request.body.rt_score || doc.rt_score
-    //         const description = request.body.description || doc.description
-    //         const people = request.body.people || doc.people
-    //         const species = request.body.species || doc.species
-    //         const image = request.body.image || doc.image
+       var id = request.params.id
 
-    //         doc.title = title,
-    //         doc.director = director,
-    //         doc.release_date = release_date,
-    //         doc.rt_score = rt_score,
-    //         doc.description = description,
-    //         doc.people = people,
-    //         doc.species = species,
-    //         doc.image = image,
-    //         console.log(doc)
-    //         doc.save();
-    //     })
-    //     console.log('PUT /filme Filme.update', request.body)
-    //     return response.json(request.body)
-    // },
+       Filme.findByIdAndUpdate(id, function(err, doc) {
+           if (err){
+               console.error('error, no entry found');  
+               return response.status(500).send('error, no entry found!');
+           }
 
-    // async destroy (request, response){
-    //     const params = request.params
-    //     await Filme.findByIdAndDelete(params._id)
-    //     console.log('DELETE /filme Filme.destroy')
-    //     return response.send('Destroy')
-    // }
+           const title = request.body.title || doc.title
+           const director = request.body.director || doc.director
+           const release_date = request.body.release_date || doc.release_date
+           const rt_score = request.body.rt_score || doc.rt_score
+           const description = request.body.description || doc.description
+           const people = request.body.people || doc.people
+           const species = request.body.species || doc.species
+           const image = request.body.image || doc.image
+
+            doc.title = title,
+            doc.director = director,
+            doc.release_date = release_date,
+            doc.rt_score = rt_score,
+            doc.description = description,
+            doc.people = people,
+            doc.species = species,
+            doc.image = image,
+            console.log(doc)
+            doc.save();
+        })
+        console.log('PUT /filme Filme.update', request.body)
+        return response.json(request.body)
+    },
+
+    async destroy (request, response){
+        const params = request.params
+        await Filme.findByIdAndDelete(params._id)
+        console.log('DELETE /filme Filme.destroy')
+        return response.send('Destroy')
+    }
 }
