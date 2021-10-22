@@ -1,0 +1,16 @@
+p.descricao-salao{
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    text-align: justify;
+    padding: 20px;
+}
+
+hr.linha{
+    margin: 0px 20px 20px;
+
+    border: 0.1px solid black;
+}
+
+.service{
+    background: none
+    }
