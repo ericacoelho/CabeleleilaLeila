@@ -13,7 +13,7 @@ module.exports = {
         
             rows.forEach(row => {
                 result.push(row)
-                console.log(`Esse foi o resultado: \n ${row.title} by ${row.name}, ${row.location}`)
+                console.log(`Esse foi o resultado:`)
             });
             console.log('GET /agenda Agenda.index', result);
             return response.json(result)
@@ -92,7 +92,7 @@ module.exports = {
 
     async destroy (request, response){
         await banco.con.query(
-            'DELETE FROM agenda WHERE idAgenda = ?', [request.body.idAgenda], (err, res) => {
+            'DELETE FROM agenda WHERE id = ?', [request.body.id], (err, res) => {
                 if (err) { 
                     console.log(err)
                     return response.status(404).send(err) 
