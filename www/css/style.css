@@ -63,7 +63,7 @@ ul{
     line-height: 19px;
 }
 
-#photo-service{
+.photo-service{
     width: 63px;
     height: 63px;
     object-fit: cover;
@@ -131,6 +131,7 @@ ul{
   .aling-central{
       display: flex;
       justify-content: center;
+      margin-bottom: 100px;
   }
 
   .navbar{
@@ -164,18 +165,22 @@ ul{
     padding: 5px;
 }
 
-.return{
-    background-color: white;
+.return {
+    background-color: transparent;
     border: none;
     font-family: Roboto;
     font-style: normal;
     font-weight: normal;
     font-size: 10px;
-    color:  #D0004B;
+    color: #fff;
+    position: absolute;
+    z-index: 100;
+    padding: 20px;
+    text-shadow: 3px 3px 3px #000000;
 }
 
 .return:after {
-    content: '\22C1';
+    /*content: '\22C1';*/
     color: #D22F6A;
     font-weight: bold;
     float: left;
