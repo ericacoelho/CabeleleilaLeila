@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+ul {list-style-type: none;}
+
+hr{
+    color: black;
+    margin: 20px;
+}
+
+h2{
+    color: #D22F6A;
+}
+
+p{
+    font-family: 'Roboto', sans-serif;
+}
+
+.month {
+    padding: 70px 25px 27px;
+    background: white;
+    text-align: center;
+  }
+
+
+  .service{
+    background: none
+    }
+
+.calendar{
+    margin: 0px 20px 20px 20px;
+}
+
+.return{
+    color: #D22F6A;
+    font-weight: bold;
+    font-size: 14px;
+    text-shadow: none;
+}
+
+  #color-calendar{
+    margin: 0px;
+    padding-top: 60px;
+  }
