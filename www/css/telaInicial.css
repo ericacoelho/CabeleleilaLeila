@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+h1{
+    font-family: 'Dancing Script', cursive;
+    font-weight: bolder;
+    font-size: 48px;
+    text-align: center;
+    margin-top: 98px;
+}
+
+.splash{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: black;
+    z-index: 0;
+    color: white;
+ }
+
+.splash.displayNone {
+   position: fixed;
+   opacity: 0;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100vh;
+   background-color: black;
+   z-index: -10;
+   color: white;
+}
+
+*{
+    padding: 0%;
+    margin: 0%;
+}
+
+body{
+     background: linear-gradient(180deg, #FBA5B4 -11.41%, #FCA4B7 -11.4%, #F2D756 100%);
+     background-repeat: no-repeat;
+     background-attachment: fixed;
+}
+
+button{
+    padding: 10px;
+    border-radius: 30px;
+    font-family: 'Roboto', sans-serif;
+    border: none;
+    background-color: white;
+    color: #D22F6A;
+    font-size: 19px;
+    width: 70%;
+    margin: 7px;   
+}
+
+a{
+    margin-top: 10px;
+    text-decoration: none;
+    color: #D22F6A;
+    font-size: 18px;
+    font-weight: bolder;
+    font-family: 'Arial', sans-serif;;
+}
+
+.buttons-nav{
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
+    bottom: 30px;
+    position: fixed;
+    width: 100%;
+}
+
+.primary{
+    background-color: #D22F6A;
+    color: white;
+}
+
+.small{
+    padding: 9px;
+    font-size: 14px;
+}
+
+@keyframes fadeIn{
+    to{
+        opacity: 1;
+    }
+}
+
+.fadeIn{
+    opacity: 0;
+    animation: fadeIn 1s ease-in forwards;
+}

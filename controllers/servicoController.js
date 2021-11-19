@@ -5,7 +5,7 @@ module.exports = {
     async index(request , response){
         const result = []
         await banco.con.query(
-            'SELECT * FROM servico as b INNER JOIN agenda as a ON a.idServico = b.idServico', 
+            'SELECT * FROM servico', 
             (err, rows) => {
             if (err) { 
                 return response.status(404).send(err) 
@@ -15,7 +15,7 @@ module.exports = {
                 result.push(row)
                 console.log(`Esse foi o resultado:`)
             });
-            console.log('GET /agenda Agenda.index', result);
+            console.log('GET /servico Servico.index', result);
             return response.json(result)
                     })
     },
@@ -23,7 +23,7 @@ module.exports = {
         const result = []
         console.log(request.params.id)
         await banco.con.query(
-            `SELECT b.id, b.title, a.name, a.location FROM book as b INNER JOIN author as a ON b.author = a.id WHERE b.id = ${request.params.id}`, 
+            `SELECT * FROM servico WHERE idServico = ${request.params.id}`, 
             (err, rows) => {
             if (err) { 
                 return response.status(404).send(err) 
@@ -33,26 +33,27 @@ module.exports = {
                 result.push(row)
                 console.log(`Esse foi o resultado: \n ${row.title} by ${row.name}, ${row.location}`)
             });
-            console.log('GET /agenda:id Agenda.show', request.params);
+            console.log('GET /servico:id Servico.show', request.params);
             return response.json(result)
         })
      },
 
     async create (request, response){
-        let { dia, valorTotal, idServico, horario, idUsuario } = request.body
-        const newAgenda = {
-                            valorTotal: valorTotal,
-                            idServico: idServico,
-                            dia: dia,
-                            horario: horario,
-                          }
+        let { descricaoServico, valorServico, tituloServico, valorServicoMin, valorServicoMax } = request.body
+        const newServico = {
+            descricaoServico: descricaoServico,
+            valorServico: valorServico,
+            tituloServico: tituloServico,
+            valorServicoMin: valorServicoMin,
+            valorServicoMax: valorServicoMax
+        }
 
         await banco.con.query(
-            'INSERT INTO agenda SET ?', newAgenda, (err, res) => {
+            'INSERT INTO servico SET ?', newServico, (err, res) => {
                 if (err) { 
                     return response.status(404).send(err) 
                 }
-            console.log('POST /filme/ Filme.create', res.insertId)
+            console.log('POST /servico/ Servico.create', res.insertId)
             return response.json(res.insertId)
         })
     },
@@ -65,9 +66,10 @@ module.exports = {
         let value = Object.values(req.body)
         let primaryKey = ''
         for (let index = 0; index < key.length ; index++) {
-            if(key[index] === 'idAgenda'){
-                primaryKey = value[index]
-            } else if (key[index] === 'idServico'){
+            if(key[index] === 'idServico'){
+            } else if (key[index] === 'valorServico'
+                    || key[index] === 'valorServicoMin'
+                    || key[index] === 'valorServicoMax'){
                 query += ` ${key[index]} = ${value[index]},`;    
             }
              else {
@@ -77,7 +79,7 @@ module.exports = {
         query = query.slice(0, -1); 
         query += ' '
 
-        query += `WHERE idAgenda = ${primaryKey};`
+        query += `WHERE idServico = ${primaryKey};`
 
         console.log(query)
         await banco.con.query(query ,
@@ -92,7 +94,7 @@ module.exports = {
 
     async destroy (request, response){
         await banco.con.query(
-            'DELETE FROM agenda WHERE id = ?', [request.body.id], (err, res) => {
+            'DELETE FROM servico WHERE idServico = ?', [request.body.id], (err, res) => {
                 if (err) { 
                     console.log(err)
                     return response.status(404).send(err) 

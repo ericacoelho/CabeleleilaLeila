@@ -1,77 +1,30 @@
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: content: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
-    <script src="components/loader.js"></script>
-    <link rel="stylesheet" href="components/loader.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script
+    src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+    crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/telaInicial.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./javascript/index.js"></script>
+    <title>Document</title>
 </head>
 <body>
-    <button class="return"><- Voltar</button>
-    <div class="capa">
-        <img src="https://images.unsplash.com/photo-1606752445013-eeb8cc06aabd?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80" alt="mulher de cabelos cacheado">
+    <div class="splash" id="splash">
+       <p class="fadeIn">Put your splashscreen content here. It can be anything!</p>
     </div>
-    <div class="title">
-        <h1 id="tituloServico"></h1>
-        <ul>
-            <li>
-                inclui lavagem com Cremes de lavanda altamente hidratantes
-            </li>
-            <li>
-                finalização e secagem
-            </li>
-        </ul>
+    <h1>Cabeleileila Leila</h1>
+    <div class="buttons-nav">
+        <button class="primary"  onclick="RedirecionarLogin()">Login</button>
+        <button class="secoundary">Cadastra-se</button>
+        <button class="secoundary small">Sobre o Salão</button>
+        <a href="">Cadastrar Salão</a>
     </div>
-    <div class="service">
-        <img class="photo-service" src="https://images.unsplash.com/photo-1624319597720-1e197203857b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="corte de cabelo">
-        <div>
-            <h2>Corte medio em camadas</h2>
-            <h3>A partir de <b>R$ 95,00</b> -  <b>R$ 210,00</b> </h3>
-        </div>
-    </div>
-    <div>
-        <button type="button" class="collapsible">Data:  DD/MM/YYYY</button>
-        <div class="content">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-        </div>
-    </div>
-    <hr>
-    <div>
-        <button type="button" class="collapsible">Horario:  HH:MM</button>
-        <div class="content">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-        </div>
-    </div>
-    <div class="aling-central">
-        <button type="button" class="accept-button">Data:  DD/MM/YYYY</button>
-    </div>
-
-    <footer class="navbar">
-            <div>
-                <img src="./components/icon/loupe 1.png" alt="Atividades Icon">
-                <p>Busca</p>
-            </div>
-            <div>
-                <img src="./components/icon/exame 1.png" onClick="addNewActivity()" alt="Atividades Icon">
-                <p>Histórico</p>
-            </div>
-            <div>
-                <img src="./components/icon/calendar 1.png" alt="Atividades Icon">
-                <p>Agenda</p>
-            </div>
-            <div>
-                <img src="./components/icon/star 1.png" alt="Atividades Icon">
-                <p>Feedback</p>
-            </div>
-            <div>
-                <img src="./components/icon/user 1.png" alt="Atividades Icon">
-                <p>Perfil</p>
-            </div>
-    </footer>
 </body>
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<script src="./components/js/index.js">
-</script>
 </html>
